@@ -1,0 +1,37 @@
+{
+  "name": "weapp-node-tunnel",
+  "version": "1.0.0",
+  "description": "小程序nodejs版本的信道服务",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "DEBUG=weapp-node-tunnel,weapp-node-tunnel:* ./node_modules/.bin/nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/miwoy/weapp-node-tunnel.git"
+  },
+  "keywords": [
+    "weapp",
+    "nodejs",
+    "tunnel"
+  ],
+  "author": "miwoy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miwoy/weapp-node-tunnel/issues"
+  },
+  "homepage": "https://github.com/miwoy/weapp-node-tunnel#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "koa": "^2.5.0",
+    "morgan": "^1.9.0",
+    "node-uuid": "^1.4.8",
+    "nodemon": "^1.17.3",
+    "socket.io": "^1.7.2"
+  }
+}
