@@ -81,7 +81,7 @@ global.CONFIG = {
 *   集群方案
 
 ## Contributions
-*   [miwoy](https://github.com/miwoy)
+*   [Miwoes](https://github.com/miwoy)
 
 ## LICENSE
 MIT License
