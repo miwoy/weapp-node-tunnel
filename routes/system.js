@@ -60,11 +60,23 @@ module.exports = (route) => {
      *  }
      */
     route.post("/ws/push", checkSignature, async(req, res) => {
+        let resp = {
+            code: 0,
+            data: {
+                successTunnelIds: [],
+                invalidTunnelIds: []
+            }
+        };
         req.body.data.forEach(data => {
             if (data.type === "message") {
                 data.tunnelIds.forEach(tunnelId => {
                     let tunnel = tunnelStore.get(tunnelId)
-                    tunnel && tunnel.send(data);
+                    if (tunnel) {
+                        tunnel.send(data);
+                        resp.data.successTunnelIds.push(tunnelId);
+                    } else {
+                        resp.data.invalidTunnelIds.push(tunnelId);
+                    }
                 });
             } else if (data.type === "close") {
                 data.tunnelIds.forEach(tunnelId => {
@@ -75,10 +87,7 @@ module.exports = (route) => {
             }
         });
 
-        res.json({
-            code: 0,
-            data: "ok"
-        })
+        res.json(resp)
     });
 
 

@@ -27,7 +27,7 @@ const server = http.createServer(web);
 const port = process.env.PORT || '8080';
 
 global.CONFIG = { // 全局配置对象
-  serverHost: "127.0.0.1",
+  serverHost: "192.168.1.45",
   port: port,
   protocol: "ws://"
 }
