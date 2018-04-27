@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DEBUG=weapp-node-tunnel,weapp-node-tunnel:* ./node_modules/.bin/nodemon index.js"
+    "dev": "DEBUG=weapp-node-tunnel,weapp-node-tunnel:* ./node_modules/.bin/nodemon index.js",
+    "start": "DEBUG=weapp-node-tunnel,weapp-node-tunnel:* node index.js"
   },
   "repository": {
     "type": "git",
