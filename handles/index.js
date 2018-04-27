@@ -25,7 +25,6 @@ module.exports = (ws) => {
         ws.tunnel.close();
     });
     ws.on("error", async(err) => {
-        console.log("ws error ", err);
         ws.tunnel.post("error:" + err.message || err);
         ws.tunnel.close(); // 清理信道
     });

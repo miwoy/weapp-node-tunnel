@@ -25,10 +25,10 @@ const server = http.createServer(web);
  */
 
 const port = process.env.PORT || '8080';
-const domain = process.env.DOMAIN || 'localhost';
+const domain = process.env.DOMAIN || 'localhost:' + port;
 
 global.CONFIG = { // 全局配置对象
-  serverHost: domain,
+  domain: domain,
   port: port,
   protocol: "ws://"
 }

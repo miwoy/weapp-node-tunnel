@@ -16,7 +16,6 @@ module.exports = async(ws, next) => {
     }
 
     let tunnel = tunnelStore.get(tunnelId);
-
     if (!tunnel) {
         ws.send({
             errno: 401,
@@ -33,8 +32,7 @@ module.exports = async(ws, next) => {
         return ws.close();
     }
 
-    tunnel.status = 1; // 启动信道，说明有用户连入
-
+    tunnel.connect(); // 启动信道，说明有用户连入
     // tunnel.ws = ws;
     ws.tunnel = tunnel;
     Object.defineProperty(tunnel, "ws", {

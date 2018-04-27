@@ -29,7 +29,19 @@ function Tunnel(data) {
 	this.receiveUrl = data.receiveUrl;
 	this.tcId = data.tcId;
 	this.tcKey = data.tcKey;
-	this.status = 0;
+	this.status = 0; // 0 未连接 1 已连接
+	Object.defineProperty(this, "timer", {
+		writable: true,
+		value: setTimeout(() => {
+			if (this.status === 0)
+				delete pool._tunnels[this.tunnelId];
+		}, 10000)
+	});
+}
+
+Tunnel.prototype.connect = function() {
+	this.status = 1;
+	clearTimeout(this.timer);
 }
 
 /**
@@ -38,7 +50,7 @@ function Tunnel(data) {
  * @param {String} content		content
  */
 Tunnel.prototype.send = function(data) {
-	
+
 	// 格式化obj->str
 	let message = data.type + (data.content ? ":" + data.content : "");
 	this.ws && this.ws.send(message);

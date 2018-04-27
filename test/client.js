@@ -1,27 +1,25 @@
 #!/usr/bin/env node
 
 var WebSocket = require('ws');
-var reuqest = require("../lib/request");
+var reuqest = require("axios");
+var {crypto} = require("../lib/common");
 const host = "127.0.0.1:8080";
 (async() => {
     let res = await reuqest.post("http://" + host + "/get/wsurl", {
-        "data": {
+        "data": JSON.stringify({
             "receiveUrl": "http://127.0.0.1:5757"
-        },
+        }),
         "tcId": "12345",
         "tcKey": "abcdefg",
-        "signature": "signature"
+        "signature": crypto.compute(JSON.stringify({
+            "receiveUrl": "http://127.0.0.1:5757"
+        }), "abcdefg")
     });
 
-
-    res.data = JSON.parse(res.data);
-    console.log("WS服务器地址", res.data.connectUrl);
-    let ws = new WebSocket(res.data.connectUrl, {
-        origin: 'https://websocket.org',
-        headers: {
-            other: "test"
-        }
-    });
+    console.log("WS服务器地址", res.data);
+    res.data = JSON.parse(res.data.data);
+    
+    let ws = new WebSocket("http://localhost:8080?tunnelId=16c9cfa4-1d41-46eb-974a-143e81fe8329&tcId=12345");
     ws.on('open', function open() {
         console.log('connected');
         // ws.send(JSON.stringify({
@@ -58,4 +56,4 @@ const host = "127.0.0.1:8080";
         console.log("message: ", data)
     })
 
-})();
+})().catch(err=>console.log(err));
