@@ -30,6 +30,7 @@
     "express": "^4.16.3",
     "jsonwebtoken": "^8.2.1",
     "koa": "^2.5.0",
+    "lodash": "^4.17.10",
     "morgan": "^1.9.0",
     "node-uuid": "^1.4.8",
     "nodemon": "^1.17.3",
