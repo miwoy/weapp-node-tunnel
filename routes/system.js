@@ -29,7 +29,7 @@ module.exports = (route) => {
         // 创建一个tunnel
         let tunnelId = uuid.v4();
         let { tcId, tcKey, data: { receiveUrl } } = req.body;
-        let connectUrl = CONFIG.protocol + CONFIG.domain + "?tunnelId=" + tunnelId + "&tcId=" + tcId;
+        let connectUrl = CONFIG.protocol + req.headers.host + "?tunnelId=" + tunnelId + "&tcId=" + tcId;
         let tunnel = new tunnelStore.Tunnel({ tunnelId, tcId, connectUrl, receiveUrl, tcKey });
         tunnelStore.add(tunnel);
         res.json({
