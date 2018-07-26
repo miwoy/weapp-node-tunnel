@@ -11,6 +11,12 @@ const { crypto } = require("../lib/common");
  *   -signature  签名
  */
 let checkSignature = async(req, res, next) => {
+    console.log(req.protocol)
+    if (typeof req.body.data !== "string") return res.json({
+        code: -1,
+        error: "check signature failed"
+    });
+
     let result = crypto.compute(req.body.data, req.body.tcKey) === req.body.signature;
     if (result) {
         req.body.data = JSON.parse(req.body.data);
@@ -29,7 +35,12 @@ module.exports = (route) => {
         // 创建一个tunnel
         let tunnelId = uuid.v4();
         let { tcId, tcKey, data: { receiveUrl } } = req.body;
-        let connectUrl = CONFIG.protocol + req.headers.host + "?tunnelId=" + tunnelId + "&tcId=" + tcId;
+        const protocolMap = {
+            http: "ws",
+            https: "wss"
+        };
+
+        let connectUrl = /*CONFIG.protocol*/ protocolMap[req.protocol] + "://" + req.headers.host + "?tunnelId=" + tunnelId + "&tcId=" + tcId;
         let tunnel = new tunnelStore.Tunnel({ tunnelId, tcId, connectUrl, receiveUrl, tcKey });
         tunnelStore.add(tunnel);
         res.json({
