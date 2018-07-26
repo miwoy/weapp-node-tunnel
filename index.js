@@ -30,7 +30,7 @@ const domain = process.env.DOMAIN || 'localhost:' + port;
 global.CONFIG = { // 全局配置对象
   domain: domain,
   port: port,
-  protocol: "ws://"
+  protocol: "wss://"
 }
 
 wss.createWSS(server);
