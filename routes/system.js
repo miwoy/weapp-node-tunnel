@@ -101,7 +101,7 @@ module.exports = (route) => {
     });
 
 
-    route.get("/system", async(req, res) => {
+    route.get("/system", checkSignature, async(req, res) => {
         res.send(tunnelStore._tunnels)
     });
 }
