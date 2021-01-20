@@ -34,6 +34,6 @@
     "morgan": "^1.9.1",
     "node-uuid": "^1.4.8",
     "nodemon": "^1.17.3",
-    "socket.io": "^1.7.2"
+    "socket.io": "^2.4.0"
   }
 }
